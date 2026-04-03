@@ -13,3 +13,13 @@ public class Stun implements StatusEffect {
     public void onApply(Combatant target) {
         System.out.println(target.getName() + " is STUNNED!");
     }
+
+    @Override
+    public void tick(Combatant target) {
+        duration--;
+    }
+
+    @Override
+    public boolean isExpired() {
+        return duration <= 0;
+    }
