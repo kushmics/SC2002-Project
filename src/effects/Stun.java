@@ -18,8 +18,18 @@ public class Stun implements StatusEffect {
     public void tick(Combatant target) {
         duration--;
     }
+    
+    @Override
+    public void onRemove(Combatant target) {
+        System.out.println(target.getName() + " is no longer stunned.");
+    }
 
     @Override
     public boolean isExpired() {
         return duration <= 0;
+    }
+
+    @Override
+    public String getName() {
+        return "Stun";
     }
