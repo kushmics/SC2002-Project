@@ -33,3 +33,9 @@ public class Stun implements StatusEffect {
     public String getName() {
         return "Stun";
     }
+
+    @Override
+    public boolean preventsAction() {
+        return true;
+    }
+}
