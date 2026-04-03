@@ -8,3 +8,8 @@ public class Stun implements StatusEffect {
     public Stun(int duration) {
         this.duration = duration;
     }
+
+    @Override
+    public void onApply(Combatant target) {
+        System.out.println(target.getName() + " is STUNNED!");
+    }
