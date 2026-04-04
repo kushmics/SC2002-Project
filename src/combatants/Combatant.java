@@ -45,4 +45,46 @@ public abstract class Combatant {
         if (this.hp < 0) this.hp = 0;
         System.out.println(name + " takes " + damage + " damage! HP is now " + this.hp + "/" + this.maxHp + ".");
     }
+
+        public void heal(int amount) {
+        this.hp += amount;
+        if (this.hp > this.maxHp) this.hp = this.maxHp;
+        System.out.println(name + " heals for " + amount + " HP! HP is now " + this.hp + "/" + this.maxHp + ".");
+    }
+
+        public boolean isAlive() {
+        return this.hp > 0;
+    }
+
+        public void addStatusEffect(StatusEffect effect) {
+        activeEffects.add(effect);
+        effect.onApply(this);
+    }
+
+    public void removeStatusEffect(StatusEffect effect) {
+        effect.onRemove(this);
+        activeEffects.remove(effect);
+    }
+
+        public void tickEffects() {
+        List<StatusEffect> toRemove = new ArrayList<>();
+        for (StatusEffect effect : activeEffects) {
+            effect.tick(this);
+            if (effect.isExpired()) {
+                toRemove.add(effect);
+            }
+        }
+        for (StatusEffect effect : toRemove) {
+            removeStatusEffect(effect);
+        }
+    }
+
+    public boolean canAct() {
+        for (StatusEffect effect : activeEffects) {
+            if (effect.preventsAction()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
