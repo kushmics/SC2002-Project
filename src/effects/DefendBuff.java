@@ -29,3 +29,14 @@ public class DefendBuff implements StatusEffect {
     public boolean isExpired() {
         return duration <= 0;
     }
+
+    @Override
+    public String getName() {
+        return "DefendBuff";
+    }
+    
+    @Override
+    public boolean preventsAction() {
+        return false;
+    }
+}
