@@ -23,6 +23,7 @@ public class DefendBuff implements StatusEffect {
     @Override
     public void onRemove(Combatant target) {
         target.setDefense(target.getDefense() - DEFENSE_BOOST);
+        System.out.println(target.getName() + "'s defense returns to normal.");
     }
 
     @Override
