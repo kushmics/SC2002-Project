@@ -16,6 +16,16 @@ public class DefendBuff implements StatusEffect {
     }
 
     @Override
+    public void tick(Combatant target) {
+        duration--;
+    }
+
+    @Override
     public void onRemove(Combatant target) {
         target.setDefense(target.getDefense() - DEFENSE_BOOST);
+    }
+
+    @Override
+    public boolean isExpired() {
+        return duration <= 0;
     }
