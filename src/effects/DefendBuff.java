@@ -9,3 +9,13 @@ public class DefendBuff implements StatusEffect {
     public DefendBuff(int duration) {
         this.duration = duration;
     }
+
+    @Override
+    public void onApply(Combatant target) {
+        target.setDefense(target.getDefense() + DEFENSE_BOOST);
+    }
+
+    @Override
+    public void onRemove(Combatant target) {
+        target.setDefense(target.getDefense() - DEFENSE_BOOST);
+    }
