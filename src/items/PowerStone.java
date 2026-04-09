@@ -12,7 +12,7 @@ public class PowerStone implements Item {
       Player p = (Player) user;
       Action specialSkill = p.getSpecialSkill();
       System.out.println(user.getName() + " channelled the Power Stone to trigger Special Skill early!");
-      p.getSpecialSkill().execute(user, target, engine);
+      specialSkill.execute(user, target, engine);
     }
   }
 
