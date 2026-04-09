@@ -23,7 +23,13 @@ public class BattleEngine {
         return combatants;
     }
 
-    public List<Comnbatant> getAliveEnemies() {
+    public List<Combatant> getAliveEnemies() {
+        return combatants.stream()
+            .filter(c -> c instanceof combatants.Enemy && c.isAlive())
+            .toList();
+    }
+
+    public List<Combatant> getAlivePlayers() {
         return combatants.stream()
             .filter(c -> c instanceof combatants.Player && c.isAlive())
             .toList();
@@ -43,7 +49,7 @@ public class BattleEngine {
             for (combatants.Enemy e : backups) {
                 System.out.println(e.getName() + " enters the battle!");
             }
-            addCombatants(bnackups);
+            addCombatants(backups);
         }
     }
 
