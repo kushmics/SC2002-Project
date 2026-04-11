@@ -12,6 +12,7 @@ public class SmokeBombEffect implements StatusEffect {
     @Override
     public void onApply(Combatant target) {
         target.setInvulnerable(true);
+        System.out.println(target.getName() + " is now enveloped in a Smoke Bomb (Invulnerable)!");
     }
 
     @Override
@@ -21,6 +22,7 @@ public class SmokeBombEffect implements StatusEffect {
 
     public void onRemove(Combatant target) {
         target.setInvulnerable(false);
+        System.out.println(target.getName() + "'s Smoke Bomb effect wears off.");
     }
 
     @Override
