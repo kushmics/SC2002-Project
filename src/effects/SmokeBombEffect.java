@@ -15,7 +15,9 @@ public class SmokeBombEffect implements StatusEffect {
     }
 
     @Override
-    public void tick(Combatant target) {}
+    public void tick(Combatant target) {
+        duration--;
+    }
 
     public void onRemove(Combatant target) {
         target.setInvulnerable(false);
