@@ -1,6 +1,6 @@
 package items;
 
-import combatants.Combatants;
+import combatants.Combatant;
 import engine.BattleEngine;
 import effects.SmokeBombEffect;
 
