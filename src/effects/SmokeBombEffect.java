@@ -20,6 +20,7 @@ public class SmokeBombEffect implements StatusEffect {
         duration--;
     }
 
+    @Override
     public void onRemove(Combatant target) {
         target.setInvulnerable(false);
         System.out.println(target.getName() + "'s Smoke Bomb effect wears off.");
