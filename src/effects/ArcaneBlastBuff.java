@@ -18,7 +18,9 @@ public class ArcaneBlastBuff implements StatusEffect {
     public void tick(Combatant target) {}
 
     @Override
-    public void onRemove(Combatant target) {}
+    public void onRemove(Combatant target) {
+        target.setAttack(target.getAttack() - attackBoost);
+    }
 
     @Override
     public boolean isExpired() {
