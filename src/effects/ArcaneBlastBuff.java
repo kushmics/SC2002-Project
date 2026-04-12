@@ -9,7 +9,9 @@ public class ArcaneBlastBuff implements StatusEffect {
     }
 
     @Override
-    public void onApply(Combatant target) {}
+    public void onApply(Combatant target) {
+        target.setAttack(target.getAttack() + attackBoost);
+    }
 
     @Override
     public void tick(Combatant target) {}
