@@ -2,6 +2,11 @@ package effects;
 import combatants.Combatant;
 
 public class ArcaneBlastBuff implements StatusEffect {
+    private int attackBoost;
+    
+    public ArcaneBlastBuff(int attackBoost) {
+        this.attackBoost = attackBoost;
+    }
 
     @Override
     public void onApply(Combatant target) {}
