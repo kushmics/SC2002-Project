@@ -11,6 +11,7 @@ public class ArcaneBlastBuff implements StatusEffect {
     @Override
     public void onApply(Combatant target) {
         target.setAttack(target.getAttack() + attackBoost);
+        System.out.println(target.getName() + " gains " + attackBoost + " base Attack from Arcane Blast!");
     }
 
     @Override
