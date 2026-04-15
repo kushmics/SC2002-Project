@@ -30,3 +30,89 @@ public class GameCLI {
             }
         }
     }
+    private void playGame() {
+        Player player = choosePlayer();
+        chooseItems(player);
+        Level level = chooseLevel();
+
+        List<Combatant> initialPlayers = new ArrayList<>();
+        initialPlayers.add(player);
+
+        BattleEngine engine = new BattleEngine(initialPlayers, level, new SpeedBasedTurnOrder());
+
+        System.out.println("\n--- BATTLE START ---");
+        while (!engine.isGameOver()) {
+            engine.incrementRound();
+            System.out.println("\n=== ROUND " + engine.getTotalRounds() + " ===");
+            List<Combatant> turnOrder = engine.getTurnOrder();
+
+            for (Combatant current : turnOrder) {
+                if (engine.isGameOver()) break;
+                if (!current.isAlive()) continue;
+
+                System.out.println("\n[" + current.getName() + "'s Turn] HP: " + current.getHp() + "/" + current.getMaxHp() + " SPD: " + current.getSpeed());
+                
+                if (current instanceof Player) {
+                    Player p = (Player) current;
+                    Action action = chooseActionForPlayer(p, engine);
+                    
+                    Combatant target = null;
+                    if (action instanceof BasicAttack || action.getName().contains("Shield Bash")) {
+                        target = chooseEnemyTarget(engine);
+                    } else if (action instanceof UseItemAction) {
+                         target = chooseEnemyTarget(engine);
+                    } else if (action instanceof ExecuteSpecialSkillAction) {
+                         if (p instanceof Warrior) {
+                             target = chooseEnemyTarget(engine);
+                         }
+                    }
+
+                    engine.executeTurn(p, action, target);
+                } else if (current instanceof Enemy) {
+                    Action action = new BasicAttack();
+                    Combatant target = engine.getAlivePlayers().get(0);
+                    engine.executeTurn(current, action, target);
+                }
+            }
+            
+            printRoundSummary(engine, player);
+        }
+
+        if (engine.isPlayerWin()) {
+            System.out.println("\n--- Player Victory ---");
+            System.out.println("Congratulations, you have defeated all your enemies.");
+            System.out.println("Remaining HP: " + player.getHp() + " | Total Rounds: " + engine.getTotalRounds());
+        } else {
+            System.out.println("\n--- Player Defeat ---");
+            System.out.println("Defeated. Don't give up, try again!");
+            System.out.println("Enemies remaining: " + engine.getAliveEnemies().size() + " | Total Rounds Survived: " + engine.getTotalRounds());
+        }
+    }
+
+    private Player choosePlayer() {
+        System.out.println("\n--- Choose Class ---");
+        System.out.println("1. Warrior (HP: 260, ATK: 40, DEF: 20, SPD: 30) - Skill: Shield Bash (Damage + Stun 2 turns)");
+        System.out.println("2. Wizard (HP: 200, ATK: 50, DEF: 10, SPD: 20) - Skill: Arcane Blast (AoE Damage + ATK Boost per kill)");
+        int choice = getIntInput(1, 2);
+        if (choice == 1) return new Warrior("Warrior");
+        else return new Wizard("Wizard");
+    }
+
+    private void chooseItems(Player player) {
+        System.out.println("\n--- Choose Items (Pick 2, duplicates allowed) ---");
+        System.out.println("1. Potion (Heal 100 HP)");
+        System.out.println("2. Power Stone (Trigger special skill without cooldown)");
+        System.out.println("3. Smoke Bomb (Enemy attacks do 0 damage this and next turn)");
+
+        for (int i = 0; i < 2; i++) {
+            System.out.print("Select item " + (i + 1) + ": ");
+            int choice = getIntInput(1, 3);
+            switch (choice) {
+                case 1: player.addItem(new Potion()); break;
+                case 2: player.addItem(new PowerStone()); break;
+                case 3: player.addItem(new SmokeBomb()); break;
+            }
+        }
+    }
+
+    
