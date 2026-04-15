@@ -128,5 +128,43 @@ public class GameCLI {
         if (choice == 2) return new Level(Level.Difficulty.MEDIUM);
         return new Level(Level.Difficulty.HARD);
     }
+    
+    private Action chooseActionForPlayer(Player p, BattleEngine engine) {
+        System.out.println("\nSelect Action:");
+        System.out.println("1. Basic Attack");
+        System.out.println("2. Defend");
+        System.out.println("3. Use Item");
+        System.out.println("4. Special Skill (Cooldown: " + p.getCurrentCooldown() + ")");
+        
+        while (true) {
+            int choice = getIntInput(1, 4);
+            if (choice == 1) return new BasicAttack();
+            if (choice == 2) return new DefendAction();
+            if (choice == 3) {
+                if (p.getInventory().isEmpty()) {
+                    System.out.println("No items left! Choose another action.");
+                    continue;
+                }
+                System.out.println("Select Item:");
+                List<Item> inv = p.getInventory();
+                for (int i = 0; i < inv.size(); i++) {
+                    System.out.println((i + 1) + ". " + inv.get(i).getName());
+                }
+                System.out.println((inv.size() + 1) + ". Cancel");
+                int itemChoice = getIntInput(1, inv.size() + 1);
+                if (itemChoice <= inv.size()) {
+                    return new UseItemAction(inv.get(itemChoice - 1));
+                }
+                System.out.println("\nSelect Action (1-4):");
+            } else if (choice == 4) {
+                if (p.canUseSpecialSkill()) {
+                    return new ExecuteSpecialSkillAction();
+                } else {
+                    System.out.println("Special skill is on cooldown! Choose another action.");
+                }
+            }
+        }
+    }
+
 
     
