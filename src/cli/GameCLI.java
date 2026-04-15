@@ -203,5 +203,15 @@ public class GameCLI {
         System.out.println("Special Skill Cooldown: " + p.getCurrentCooldown() + " rounds");
     }
 
-
+    private int getIntInput(int min, int max) {
+        while (true) {
+            try {
+                int value = Integer.parseInt(scanner.nextLine().trim());
+                if (value >= min && value <= max) return value;
+                System.out.print("Please enter a number between " + min + " and " + max + ": ");
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Please enter a number: ");
+            }
+        }
+    }
     
