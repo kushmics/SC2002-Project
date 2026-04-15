@@ -24,7 +24,7 @@ public class Level {
     setupSpawns();
   }
 
-  private void setupSpawn() {
+  private void setupSpawns() {
     switch (difficulty) {
       case EASY:
         initialSpawn.add(new Goblin("Goblin A"));
