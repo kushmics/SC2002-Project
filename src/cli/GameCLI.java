@@ -165,6 +165,18 @@ public class GameCLI {
             }
         }
     }
+    private Enemy chooseEnemyTarget(BattleEngine engine) {
+        List<Combatant> enemies = engine.getAliveEnemies();
+        if (enemies.isEmpty()) return null;
+        if (enemies.size() == 1) return (Enemy) enemies.get(0);
+
+        System.out.println("Select Target:");
+        for (int i = 0; i < enemies.size(); i++) {
+            System.out.println((i + 1) + ". " + enemies.get(i).getName() + " (HP: " + enemies.get(i).getHp() + ")");
+        }
+        int choice = getIntInput(1, enemies.size());
+        return (Enemy) enemies.get(choice - 1);
+    }
 
 
     
