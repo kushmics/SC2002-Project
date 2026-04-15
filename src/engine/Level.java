@@ -16,7 +16,7 @@ public class Level {
   private List<Enemy> backupSpawn;
   private boolean backupSpawnTriggered;
 
-  private Level(Difficulty difficulty) {
+  public Level(Difficulty difficulty) {
     this.difficulty = difficulty;
     this.initialSpawn = new ArrayList<>();
     this.backupSpawn = new ArrayList<>();
