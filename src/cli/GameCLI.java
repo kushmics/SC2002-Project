@@ -114,5 +114,19 @@ public class GameCLI {
             }
         }
     }
+     private Level chooseLevel() {
+        System.out.println("\n--- Choose Difficulty ---");
+        System.out.println("1. Easy (3 Goblins)");
+        System.out.println("2. Medium (1 Goblin, 1 Wolf -> Backup: 2 Wolves)");
+        System.out.println("3. Hard (2 Goblins -> Backup: 1 Goblin, 2 Wolves)");
+        System.out.println("\nEnemy Stats:");
+        System.out.println("Goblin - HP: 55, ATK: 35, DEF: 15, SPD: 25");
+        System.out.println("Wolf   - HP: 40, ATK: 45, DEF: 5,  SPD: 35");
+
+        int choice = getIntInput(1, 3);
+        if (choice == 1) return new Level(Level.Difficulty.EASY);
+        if (choice == 2) return new Level(Level.Difficulty.MEDIUM);
+        return new Level(Level.Difficulty.HARD);
+    }
 
     
