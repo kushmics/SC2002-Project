@@ -177,6 +177,25 @@ public class GameCLI {
         int choice = getIntInput(1, enemies.size());
         return (Enemy) enemies.get(choice - 1);
     }
+    private void printRoundSummary(BattleEngine engine, Player p) {
+        System.out.println("\n--- End of Round " + engine.getTotalRounds() + " ---");
+        for (Combatant c : engine.getAlivePlayers()) {
+            System.out.print(c.getName() + " HP: " + c.getHp() + "/" + c.getMaxHp() + " | ");
+        }
+        for (Combatant c : engine.getAliveEnemies()) {
+            System.out.print(c.getName() + " HP: " + c.getHp() + " | ");
+        }
+        
+        // Count items
+        int potions = 0, bombs = 0, stones = 0;
+        for (Item i : p.getInventory()) {
+            if (i instanceof Potion) potions++;
+            if (i instanceof SmokeBomb) bombs++;
+            if (i instanceof PowerStone) stones++;
+        }
+        System.out.println("\nPotions: " + potions + " | Smoke Bombs: " + bombs + " | Power Stones: " + stones);
+        System.out.println("Special Skill Cooldown: " + p.getCurrentCooldown() + " rounds");
+    }
 
 
     
