@@ -14,4 +14,9 @@ public class SmokeBomb implements Item {
   public String getName() {
     return "Smoke Bomb";
   }
+
+  @Override
+  public boolean requiresTarget() {
+    return false;
+  }
 }

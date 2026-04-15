@@ -13,4 +13,9 @@ public class Potion implements Item {
   public String getName() {
     return "Potion";
   }
+
+  @Override
+  public boolean requiresTarget() {
+    return false;
+  }
 }

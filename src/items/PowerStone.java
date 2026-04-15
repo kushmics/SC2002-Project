@@ -20,4 +20,10 @@ public class PowerStone implements Item {
   public String getName() {
     return "Power Stone";
   }
+
+  @Override
+  public boolean requiresTarget() {
+    // since it triggers the special skill, could potentially require a target, lets just ask to be safe!
+    return true;
+  }
 }
