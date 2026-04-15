@@ -62,7 +62,7 @@ public class BattleEngine {
     }
 
     public boolean isGameOver() {
-        return getAlivePlayer().isEmpty() || getAliveEnemies().isEmpty();
+        return getAlivePlayers().isEmpty() || getAliveEnemies().isEmpty();
     }
 
     public boolean isPlayerWin() {
