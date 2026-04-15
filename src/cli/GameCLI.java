@@ -57,14 +57,12 @@ public class GameCLI {
                     Action action = chooseActionForPlayer(p, engine);
                     
                     Combatant target = null;
-                    if (action instanceof BasicAttack || action.getName().contains("Shield Bash")) {
+                    if (action instanceof ExecuteSpecialSkillAction) {
+                        if (p.getSpecialSkill().requiresTarget()) {
+                            target = chooseEnemyTarget(engine);
+                        }
+                    } else if (action.requiresTarget()) {
                         target = chooseEnemyTarget(engine);
-                    } else if (action instanceof UseItemAction) {
-                         target = chooseEnemyTarget(engine);
-                    } else if (action instanceof ExecuteSpecialSkillAction) {
-                         if (p instanceof Warrior) {
-                             target = chooseEnemyTarget(engine);
-                         }
                     }
 
                     engine.executeTurn(p, action, target);
