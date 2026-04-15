@@ -192,7 +192,7 @@ public class GameCLI {
         }
         
         // Count items
-        int potions = 0, bombs = 0, stones = 0;
+        int potions = 0, bombs = 0, stones = 0, clouds = 0;
         for (Item i : p.getInventory()) {
             if (i instanceof Potion) potions++;
             if (i instanceof SmokeBomb) bombs++;
