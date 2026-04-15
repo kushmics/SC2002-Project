@@ -17,4 +17,9 @@ public class ShieldBashAction implements Action{
     public String getName() {
         return "Shield Bash";
     } 
+
+    @Override
+    public boolean requiresTarget() {
+        return true;
+    }
 }

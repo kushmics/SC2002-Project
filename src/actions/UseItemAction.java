@@ -12,6 +12,10 @@ public class UseItemAction implements Action {
         this.item = item;
     }
 
+    public Item getItem() {
+        return item;
+    }
+
     @Override
     public void execute(Combatant actor, Combatant target, BattleEngine engine) {
         if (actor instanceof Player) {
@@ -24,5 +28,10 @@ public class UseItemAction implements Action {
     @Override
     public String getName() {
         return "Use Item (" + item.getName() + ")";
+    }
+
+    @Override
+    public boolean requiresTarget() {
+        return item.requiresTarget();
     }
 }

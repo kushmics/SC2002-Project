@@ -15,4 +15,9 @@ public class DefendAction implements Action {
     public String getName() {
         return "Defend";
     }
+
+    @Override
+    public boolean requiresTarget() {
+        return false;
+    }
 }

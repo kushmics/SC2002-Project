@@ -31,4 +31,9 @@ public class ArcaneBlastAction implements Action {
     public String getName() {
         return "Arcane Blast";
     }
+
+    @Override
+    public boolean requiresTarget() {
+        return false;
+    }
 }

@@ -22,4 +22,9 @@ public class ExecuteSpecialSkillAction implements Action {
     public String getName() {
         return "Execute Special Skill";
     }
+
+    @Override
+    public boolean requiresTarget() {
+        return false;
+    }
 }

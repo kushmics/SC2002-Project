@@ -15,4 +15,9 @@ public class BasicAttack implements Action {
     public String getName() {
         return "Basic Attack";
     }
+
+    @Override
+    public boolean requiresTarget() {
+        return true;
+    }
 }
