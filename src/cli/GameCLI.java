@@ -103,6 +103,7 @@ public class GameCLI {
         System.out.println("1. Potion (Heal 100 HP)");
         System.out.println("2. Power Stone (Trigger special skill without cooldown)");
         System.out.println("3. Smoke Bomb (Enemy attacks do 0 damage this and next turn)");
+        System.out.println("4. Poison Cloud (Deal 15 poison damage per turn for 3 turns)");
 
         for (int i = 0; i < 2; i++) {
             System.out.print("Select item " + (i + 1) + ": ");
@@ -111,6 +112,7 @@ public class GameCLI {
                 case 1: player.addItem(new Potion()); break;
                 case 2: player.addItem(new PowerStone()); break;
                 case 3: player.addItem(new SmokeBomb()); break;
+                case 4: player.addItem(new PoisonCloud()); break;
             }
         }
     }
@@ -195,6 +197,7 @@ public class GameCLI {
             if (i instanceof Potion) potions++;
             if (i instanceof SmokeBomb) bombs++;
             if (i instanceof PowerStone) stones++;
+            if (i instanceof PoisonCloud) clouds++;
         }
         System.out.println("\nPotions: " + potions + " | Smoke Bombs: " + bombs + " | Power Stones: " + stones);
         System.out.println("Special Skill Cooldown: " + p.getCurrentCooldown() + " rounds");
