@@ -107,7 +107,7 @@ public class GameCLI {
 
         for (int i = 0; i < 2; i++) {
             System.out.print("Select item " + (i + 1) + ": ");
-            int choice = getIntInput(1, 3);
+            int choice = getIntInput(1, 4);
             switch (choice) {
                 case 1: player.addItem(new Potion()); break;
                 case 2: player.addItem(new PowerStone()); break;
