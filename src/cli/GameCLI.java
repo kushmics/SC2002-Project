@@ -215,3 +215,8 @@ public class GameCLI {
         }
     }
     
+    public static void main(String[] args) {
+        System.out.println("Starting SC2002 Combat Arena...");
+        new GameCLI().start();
+    }
+}
