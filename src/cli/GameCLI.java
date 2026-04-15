@@ -1,4 +1,5 @@
 package cli;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,6 +31,7 @@ public class GameCLI {
             }
         }
     }
+
     private void playGame() {
         Player player = choosePlayer();
         chooseItems(player);
@@ -112,6 +114,7 @@ public class GameCLI {
             }
         }
     }
+
      private Level chooseLevel() {
         System.out.println("\n--- Choose Difficulty ---");
         System.out.println("1. Easy (3 Goblins)");
@@ -163,6 +166,7 @@ public class GameCLI {
             }
         }
     }
+
     private Enemy chooseEnemyTarget(BattleEngine engine) {
         List<Combatant> enemies = engine.getAliveEnemies();
         if (enemies.isEmpty()) return null;
@@ -175,6 +179,7 @@ public class GameCLI {
         int choice = getIntInput(1, enemies.size());
         return (Enemy) enemies.get(choice - 1);
     }
+    
     private void printRoundSummary(BattleEngine engine, Player p) {
         System.out.println("\n--- End of Round " + engine.getTotalRounds() + " ---");
         for (Combatant c : engine.getAlivePlayers()) {
