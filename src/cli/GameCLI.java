@@ -220,20 +220,3 @@ public class GameCLI {
         new GameCLI().start();
     }
 }
- private int getIntInput(int min, int max) {
-        while (true) {
-            try {
-                int value = Integer.parseInt(scanner.nextLine().trim());
-                if (value >= min && value <= max) return value;
-                System.out.print("Please enter a number between " + min + " and " + max + ": ");
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Please enter a number: ");
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Starting SC2002 Combat Arena...");
-        new GameCLI().start();
-    }
-}
