@@ -199,7 +199,7 @@ public class GameCLI {
             if (i instanceof PowerStone) stones++;
             if (i instanceof PoisonCloud) clouds++;
         }
-        System.out.println("\nPotions: " + potions + " | Smoke Bombs: " + bombs + " | Power Stones: " + stones + " | Poison Clouds: " + clouds)
+        System.out.println("\nPotions: " + potions + " | Smoke Bombs: " + bombs + " | Power Stones: " + stones + " | Poison Clouds: " + clouds);
         System.out.println("Special Skill Cooldown: " + p.getCurrentCooldown() + " rounds");
     }
 
