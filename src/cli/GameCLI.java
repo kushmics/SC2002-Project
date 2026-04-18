@@ -88,7 +88,7 @@ public class GameCLI {
             System.out.println("Defeated. Don't give up, try again!");
             System.out.println("Enemies remaining: " + engine.getAliveEnemies().size() + " | Total Rounds Survived: " + engine.getTotalRounds());
         }
-    
+
         return promptPostGame(settings);
     }
 
@@ -142,26 +142,20 @@ public class GameCLI {
         return getIntInput(1, 2);
     }
 
-    private void chooseItems(Player player) {
+    private void promptItemChoices(int[] itemChoices) {
         System.out.println("\n--- Choose Items (Pick 2, duplicates allowed) ---");
         System.out.println("1. Potion (Heal 100 HP)");
         System.out.println("2. Power Stone (Trigger special skill without cooldown)");
         System.out.println("3. Smoke Bomb (Enemy attacks do 0 damage this and next turn)");
         System.out.println("4. Poison Cloud (Deal 15 poison damage per turn for 3 turns)");
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < itemChoices.length; i++) {
             System.out.print("Select item " + (i + 1) + ": ");
-            int choice = getIntInput(1, 4);
-            switch (choice) {
-                case 1: player.addItem(new Potion()); break;
-                case 2: player.addItem(new PowerStone()); break;
-                case 3: player.addItem(new SmokeBomb()); break;
-                case 4: player.addItem(new PoisonCloud()); break;
-            }
+            itemChoices[i] = getIntInput(1, 4);
         }
     }
 
-     private Level chooseLevel() {
+    private Level.Difficulty promptDifficulty() {
         System.out.println("\n--- Choose Difficulty ---");
         System.out.println("1. Easy (3 Goblins)");
         System.out.println("2. Medium (1 Goblin, 1 Wolf -> Backup: 2 Wolves)");
@@ -171,9 +165,9 @@ public class GameCLI {
         System.out.println("Wolf   - HP: 40, ATK: 45, DEF: 5,  SPD: 35");
 
         int choice = getIntInput(1, 3);
-        if (choice == 1) return new Level(Level.Difficulty.EASY);
-        if (choice == 2) return new Level(Level.Difficulty.MEDIUM);
-        return new Level(Level.Difficulty.HARD);
+        if (choice == 1) return Level.Difficulty.EASY;
+        if (choice == 2) return Level.Difficulty.MEDIUM;
+        return Level.Difficulty.HARD;
     }
     
     private Action chooseActionForPlayer(Player p, BattleEngine engine) {
