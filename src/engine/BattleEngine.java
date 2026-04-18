@@ -80,10 +80,10 @@ public class BattleEngine {
         currentCombatant.tickEffects();
 
         if (currentCombatant.canAct()) {
-            chosenAction.execute(currentCombatant, target, this);
             if (currentCombatant instanceof combatants.Player) {
                 ((combatants.Player) currentCombatant).reduceCooldown();
             }
+            chosenAction.execute(currentCombatant, target, this);
         }
         else {
             System.out.println(currentCombatant.getName() + " is unable to act this turn! (Turn Skipped)");
