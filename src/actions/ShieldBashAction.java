@@ -10,7 +10,7 @@ public class ShieldBashAction implements Action{
         int damage = Math.max(0, actor.getAttack() - target.getDefense());
         System.out.println(actor.getName() + " uses Shield Bash on " + target.getName() + "!");
         target.takeDamage(damage);
-        target.addStatusEffect(new Stun(2));
+        target.addStatusEffect(new Stun(3));
     }
     
     @Override
