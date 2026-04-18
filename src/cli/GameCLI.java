@@ -88,15 +88,58 @@ public class GameCLI {
             System.out.println("Defeated. Don't give up, try again!");
             System.out.println("Enemies remaining: " + engine.getAliveEnemies().size() + " | Total Rounds Survived: " + engine.getTotalRounds());
         }
+    
+        return promptPostGame(settings);
     }
 
-    private Player choosePlayer() {
+    private boolean promptPostGame(GameSettings settings) {
+        System.out.println("\n--- What would you like to do? ---");
+        System.out.println("1. Replay (same settings)");
+        System.out.println("2. New Game (return to main menu)");
+        System.out.println("3. Exit");
+        int choice = getIntInput(1, 3);
+        if (choice == 1) {
+            return playGame(settings);
+        } else if (choice == 2) {
+            return true;
+        } else {
+            System.out.println("Goodbye!");
+            return false;
+        }
+    }
+
+    private static class GameSettings {
+        int playerChoice;
+        int[] itemChoices = new int[2];
+        Level.Difficulty difficulty;
+    }
+
+    private GameSettings captureSettings() {
+        GameSettings s = new GameSettings();
+        s.playerChoice = promptPlayerChoice();
+        promptItemChoices(s.itemChoices);
+        s.difficulty = promptDifficulty();
+        return s;
+    }
+
+    private Player buildPlayer(GameSettings s) {
+        Player player = (s.playerChoice == 1) ? new Warrior("Warrior") : new Wizard("Wizard");
+        for (int c : s.itemChoices) {
+            switch (c) {
+                case 1: player.addItem(new Potion()); break;
+                case 2: player.addItem(new PowerStone()); break;
+                case 3: player.addItem(new SmokeBomb()); break;
+                case 4: player.addItem(new PoisonCloud()); break;
+            }
+        }
+        return player;
+    }
+
+    private int promptPlayerChoice() {
         System.out.println("\n--- Choose Class ---");
         System.out.println("1. Warrior (HP: 260, ATK: 40, DEF: 20, SPD: 30) - Skill: Shield Bash (Damage + Stun 2 turns)");
         System.out.println("2. Wizard (HP: 200, ATK: 50, DEF: 10, SPD: 20) - Skill: Arcane Blast (AoE Damage + ATK Boost per kill)");
-        int choice = getIntInput(1, 2);
-        if (choice == 1) return new Warrior("Warrior");
-        else return new Wizard("Wizard");
+        return getIntInput(1, 2);
     }
 
     private void chooseItems(Player player) {
