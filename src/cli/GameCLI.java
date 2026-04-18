@@ -24,7 +24,7 @@ public class GameCLI {
             System.out.println("2. Exit");
             int choice = getIntInput(1, 2);
             if (choice == 1) {
-                playGame();
+                running = playGame(null);
             } else {
                 running = false;
                 System.out.println("Goodbye!");
@@ -32,10 +32,11 @@ public class GameCLI {
         }
     }
 
-    private void playGame() {
-        Player player = choosePlayer();
-        chooseItems(player);
-        Level level = chooseLevel();
+    private boolean playGame(GameSettings preset) {
+        GameSettings settings = (preset != null) ? preset : captureSettings();
+
+        Player player = buildPlayer(settings);
+        Level level = new Level(settings.difficulty);
 
         List<Combatant> initialPlayers = new ArrayList<>();
         initialPlayers.add(player);
