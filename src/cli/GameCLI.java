@@ -187,8 +187,15 @@ public class GameCLI {
         for (Combatant c : engine.getAlivePlayers()) {
             System.out.print(c.getName() + " HP: " + c.getHp() + "/" + c.getMaxHp() + " | ");
         }
-        for (Combatant c : engine.getAliveEnemies()) {
-            System.out.print(c.getName() + " HP: " + c.getHp() + " | ");
+
+        for (Combatant c : engine.getCombatants()) {
+            if (c instanceof Enemy) {
+                if (c.isAlive()) {
+                    System.out.print(c.getName() + " HP: " + c.getHp() + " | ");
+                } else {
+                    System.out.print(c.getName() + " HP: \u2717 | ");  // ✗
+                }
+            }
         }
         
         // Count items
