@@ -40,7 +40,6 @@ public class BattleEngine {
     }
 
     public void removeDeadCombatants() {
-        boolean enemiesDied = combatants.removeIf(c -> !c.isAlive() && c instanceof combatants.Enemy);
 
         if (getAliveEnemies().isEmpty() && currentLevel.hasBackupSpawns()) {
             System.out.println("\nAll initial enemies eliminated -> Backup Spawn triggered!");
